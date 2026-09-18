@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # IAGuard firewall helper — helper de UNA función, instalado UNA vez por el usuario.
 #
-#   Uso:  iaguard-firewall status | list | deny <ip> | allow <ip>
+#   Uso:  iaguard-firewall status | list | deny <ip> | allow <ip> | uninstall
 #
 # - Linux: ufw   (reglas propias etiquetadas "IAGuard BLOCK <ip>": entrante con
 #                `ufw deny from` y saliente con `ufw deny out to`; jamás toca reglas ajenas)
@@ -18,7 +18,12 @@
 #   %wheel ALL=(root) NOPASSWD: /usr/local/sbin/iaguard-firewall status, \
 #       /usr/local/sbin/iaguard-firewall list, \
 #       /usr/local/sbin/iaguard-firewall deny *, \
-#       /usr/local/sbin/iaguard-firewall allow *
+#       /usr/local/sbin/iaguard-firewall allow *, \
+#       /usr/local/sbin/iaguard-firewall uninstall
+#
+# `uninstall` es el botón "Desinstalar helper" de la app (solo Linux): borra las
+# reglas propias de ufw/pf, el fichero sudoers y se auto-elimina. Si no añadiste
+# la entrada `uninstall` al sudoers, desinstala a mano (ver documentación).
 #
 # Nunca pide contraseña en runtime: si no está autorizado, `sudo -n` falla al
 # instante y la app degrada con la guía (misma filosofía que la captura).
@@ -89,8 +94,34 @@ case "$ACTION" in
 		fi
 		exit 0
 		;;
+	uninstall)
+		# Botón "Desinstalar helper" de la app (solo Linux; requiere la entrada
+		# `uninstall` en el sudoers NOPASSWD). Borra SOLO lo que este helper creó:
+		# reglas propias, el fichero sudoers y se auto-elimina. No toca ufw/pf
+		# (los deja como estaban, sin reglas IAGuard).
+		if command -v pfctl >/dev/null 2>&1; then
+			pfctl -a com.iaguard -t blocked -T flush >/dev/null 2>&1
+		fi
+		if command -v ufw >/dev/null 2>&1; then
+			# Misma extracción que `list`: borra entrante + saliente de cada IP nuestra.
+			for ip in $(ufw status numbered 2>/dev/null | grep -E "IAGuard BLOCK" \
+				| sed -E 's/.*IAGuard BLOCK( OUT)?[ =]+([0-9a-fA-F:.]+).*/\2/' | sort -u); do
+				ufw delete deny from "$ip" >/dev/null 2>&1
+				ufw delete deny out to "$ip" >/dev/null 2>&1
+			done
+		fi
+		rm -f /etc/sudoers.d/iaguard
+		# Auto-eliminación segura: solo si estamos en la ruta de instalación
+		# estándar (jamás borrar una copia de desarrollo del repo).
+		case "$0" in
+			/usr/local/sbin/*) rm -f "$0" ;;
+			*) echo "aviso: no me auto-elimino fuera de /usr/local/sbin" >&2 ;;
+		esac
+		echo "UNINSTALL OK"
+		exit 0
+		;;
 	*)
-		echo "uso: $0 status|list|deny <ip>|allow <ip>" >&2
+		echo "uso: $0 status|list|deny <ip>|allow <ip>|uninstall" >&2
 		exit 2
 		;;
 esac

@@ -13,6 +13,10 @@ Optionally, it can:
 Everything is local by design: the app analyzes your network on-device and never uploads your
 traffic or events anywhere.
 
+## ScreenShoot
+
+<img width="1628" height="878" alt="iaward" src="https://github.com/user-attachments/assets/2469f129-ab8a-4dab-a6a7-1e370b42f262" />
+
 ## Features
 
 - Live connection monitoring with confidence/risk scoring

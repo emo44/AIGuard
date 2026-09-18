@@ -57,18 +57,21 @@ opt-in, and short-expiry automatic blocking are all configurable in Settings.
 ### Install (Linux)
 
 ```bash
-# 1. Download and install the helper (exact file matching the published SHA-256 below)
-sudo curl -fsSL https://raw.githubusercontent.com/emo44/AIGuard/main/tools/iaguard-firewall.sh \
-  -o /usr/local/sbin/iaguard-firewall
+# 1. Helper
+sudo curl -fsSL https://raw.githubusercontent.com/emo44/AIGuard/main/tools/iaguard-firewall.sh -o /usr/local/sbin/iaguard-firewall
 sudo chmod 0755 /usr/local/sbin/iaguard-firewall
+sha256sum /usr/local/sbin/iaguard-firewall
 
-# 2. Authorize ONLY this helper in sudoers (never a generic sudo)
-#    /etc/sudoers.d/iaguard — validate with: sudo visudo -cf /etc/sudoers.d/iaguard
+# 2. Crear el fichero sudoers (heredoc → no ejecuta nada, escribe el fichero)
+sudo tee /etc/sudoers.d/iaguard >/dev/null <<'EOF'
 %wheel ALL=(root) NOPASSWD: /usr/local/sbin/iaguard-firewall status, \
     /usr/local/sbin/iaguard-firewall list, \
     /usr/local/sbin/iaguard-firewall deny *, \
     /usr/local/sbin/iaguard-firewall allow *, \
     /usr/local/sbin/iaguard-firewall uninstall
+EOF
+sudo chmod 0440 /etc/sudoers.d/iaguard
+sudo visudo -cf /etc/sudoers.d/iaguard
 
 # 3. Make sure ufw is running
 sudo ufw enable

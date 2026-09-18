@@ -1,4 +1,4 @@
-# IAGuard
+# IAGuard (Beta)
 
 IAGuard is a desktop network security monitor that watches live connections, detects suspicious
 outbound traffic and new listening services, and flags connections to hosts with a bad

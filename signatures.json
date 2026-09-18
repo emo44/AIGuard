@@ -1,0 +1,30 @@
+{
+  "format": 1,
+  "version": 2,
+  "valid_until": "2026-12-31",
+  "rules": [
+    {
+      "id": "DOC-01",
+      "kind": "reputation_cidr",
+      "value": "192.0.2.0/24",
+      "weight": 0.6,
+      "reason": "Rango de documentación RFC 5737 — prueba del flujo de firmas (redes TEST-NET, no enrutables)"
+    },
+    {
+      "id": "DOC-02",
+      "kind": "reputation_cidr",
+      "value": "198.51.100.0/24",
+      "weight": 0.6,
+      "reason": "Rango de documentación RFC 5737 — prueba del flujo de firmas (redes TEST-NET, no enrutables)"
+    },
+    {
+      "id": "DOC-03",
+      "kind": "reputation_cidr",
+      "value": "203.0.113.0/24",
+      "weight": 0.6,
+      "reason": "Rango de documentación RFC 5737 — prueba del flujo de firmas (redes TEST-NET, no enrutables)"
+    }
+  ],
+  "fingerprint": "2d68198222c06e5e1a3b0fa8de77de1dd7a8eee21c0b17b53dc6a5b21de151c1",
+  "sig": "0fJO+wvsHtDl+wxlLXxk7KW1Jo+SRRm7UjkUkSsMzTw1/dYpjPcBOuM6y+lpX+2z7KCVDvTlZKoGQqdZSVeV1hlJVutpR/j3tpOG/7CJLbIf3ASKA663nNZAvrEgDzwsEfDJPq3AU6FB98A4gXA9ZCJBA8LoRmDJOsOKhiy/vhuihHkzy1mZI2DWQCHPo/fPzyTVOebl8yELCqiMCCnZqpRUT65gtdjw7o+fjuX2r9kDUeVmbMuvytw0gzlxbt/8O+Oh06qkTvtoCHbpkuaXuEU+Jz2VGVeZ1i+IO1u+U50Vlh/gM5RkTXvKZ6Up4O667CIgbwSjWX5gSfrq81Jtiw=="
+}

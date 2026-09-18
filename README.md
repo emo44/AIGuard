@@ -56,20 +56,20 @@ opt-in, and short-expiry automatic blocking are all configurable in Settings.
 
 ### Install (Linux)
 
-```bash
+```Fish
 # 1. Helper
 sudo curl -fsSL https://raw.githubusercontent.com/emo44/AIGuard/main/tools/iaguard-firewall.sh -o /usr/local/sbin/iaguard-firewall
 sudo chmod 0755 /usr/local/sbin/iaguard-firewall
 sha256sum /usr/local/sbin/iaguard-firewall
 
-# 2. Crear el fichero sudoers (heredoc → no ejecuta nada, escribe el fichero)
-sudo tee /etc/sudoers.d/iaguard >/dev/null <<'EOF'
-%wheel ALL=(root) NOPASSWD: /usr/local/sbin/iaguard-firewall status, \
-    /usr/local/sbin/iaguard-firewall list, \
-    /usr/local/sbin/iaguard-firewall deny *, \
-    /usr/local/sbin/iaguard-firewall allow *, \
-    /usr/local/sbin/iaguard-firewall uninstall
-EOF
+# 2. Sudoers (versión fish — printf, NO heredoc)
+printf '%s\n' \
+  '%wheel ALL=(root) NOPASSWD: /usr/local/sbin/iaguard-firewall status, \\' \
+  '    /usr/local/sbin/iaguard-firewall list, \\' \
+  '    /usr/local/sbin/iaguard-firewall deny *, \\' \
+  '    /usr/local/sbin/iaguard-firewall allow *, \\' \
+  '    /usr/local/sbin/iaguard-firewall uninstall' \
+  | sudo tee /etc/sudoers.d/iaguard >/dev/null
 sudo chmod 0440 /etc/sudoers.d/iaguard
 sudo visudo -cf /etc/sudoers.d/iaguard
 

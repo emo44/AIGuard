@@ -1,3 +1,8 @@
+[![Total Downloads](https://img.shields.io/github/downloads/emo44/AIGuard/total?label=Total%20Downloads&style=flat-square&color=2ea44f)](https://github.com/emo44/AIGuard/releases)
+
+[![Latest Release Downloads](https://img.shields.io/github/downloads/emo44/AIGuard/latest/total?label=Latest%20Release&style=flat-square)](https://github.com/emo44/AIGuard/releases)
+
+[![Latest Downloads (incl. pre-releases)](https://img.shields.io/github/downloads-pre/emo44/AIGuard/latest/total?label=Latest%20incl.%20pre-release&style=flat-square&color=orange)](https://github.com/emo44/AIGuard/releases)
 # IAGuard
 Network security monitor with local AI. Watches your connections in real time,
 flags suspicious activity with local heuristics, and — **optionally** — a local

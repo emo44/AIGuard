@@ -24,7 +24,7 @@ traffic or events anywhere.
 - Local AI analysis (offline LLM) with manual, event-driven, or periodic modes — all traffic stays on your machine
 - Optional signed detection feed (see below)
 - Optional bidirectional IP blocking with whitelist and automatic expiry
-- Works on Linux (ufw), macOS (pfctl), and Windows (built-in firewall rules)
+- Works on Linux (ufw) and Windows (built-in firewall rules)
 
 ## Signed detection feed
 
@@ -43,7 +43,7 @@ rejected and the last known-good feed to be kept.
 The feed currently includes Spamhaus DROP CIDR ranges (local/private/reserved networks are
 filtered out).
 
-## Optional firewall helper (Linux/macOS)
+## Optional firewall helper (Linux)
 
 To actually block attacker IPs, the app uses a tiny "one job" helper
 ([`tools/iaguard-firewall.sh`](tools/iaguard-firewall.sh)) installed once by you with root
@@ -77,8 +77,7 @@ sudo visudo -cf /etc/sudoers.d/iaguard
 sudo ufw enable
 ```
 
-Then restart IAGuard so it detects the helper. On macOS the helper uses a dedicated
-`com.iaguard` pfctl anchor (configure it to block in both directions).
+Then restart IAGuard so it detects the helper. 
 
 ### Fingerprint verification
 

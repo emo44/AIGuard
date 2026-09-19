@@ -1,18 +1,19 @@
 # IAGuard
-
-Network security monitor with local AI. Watches your connections in real time
-and a local AI analyst (Ollama) interprets what it sees — **nothing leaves your
-computer**: no account, no cloud, no telemetry.
+Network security monitor with local AI. Watches your connections in real time,
+flags suspicious activity with local heuristics, and — **optionally** — a local
+AI analyst (Ollama) interprets what it sees. **Nothing leaves your computer**:
+no account, no cloud, no telemetry.
 
 ## Features
 
 - **Real-time monitoring** of active connections and system events, with a
   configurable interval.
 - **Local heuristics**: possible port scans, new ports listening, failed login
-  attempts (brute force) and connections to IPs with a bad reputation.
-- **Local AI analyst** (Ollama): rates the risk, explains what is suspicious and
-  why, and suggests actions. Answers your questions in streaming, directly about
-  the current state of your network.
+  attempts (brute force) and connections to IPs with a bad reputation. These
+  work with or without AI.
+- **Optional AI analyst** (Ollama): rates the risk, explains what is suspicious
+  and why, and suggests actions. Answers your questions in streaming about the
+  current state of your network. Everything runs on your own machine.
 - **Connections panel** that is sortable and filterable, with instant risk score
   and suspicious processes flagged.
 - **Event history** with analysis and search by time window.
@@ -20,7 +21,7 @@ computer**: no account, no cloud, no telemetry.
 - **Optional blocking** of malicious IPs through the system firewall, with
   whitelist and configurable duration.
 - **Reputation feed** updated and signed (cryptographically verified).
-- **No GPU required**: works well with small models on CPU.
+- **No GPU required**: works well with small models on CPU (AI features).
 
 ## Platforms
 
@@ -28,8 +29,13 @@ Only **Windows** and **Linux** builds are published.
 
 ## Requirements
 
-- Ollama running locally with an installed model
-  (recommended without GPU: `llama3.2:3b`, `qwen3:4b`).
+- **Windows**: Windows 10 or 11 (64-bit). Nothing else needs to be installed.
+- **Linux**: standard tools already present on virtually every distro —
+  `ss` (iproute2) for connections and `journalctl` (systemd) for failed-login
+  detection. No root required for monitoring.
+- **Optional**: Ollama running locally with an installed model
+  (recommended without GPU: `llama3.2:3b`, `qwen3:4b`) to enable the AI analyst.
+  The app works fully without it.
 
 ## Disclaimer
 

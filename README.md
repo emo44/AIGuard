@@ -44,7 +44,6 @@ Project in **beta**: distributed "as is", without warranties. Use it as a
 visibility and analysis layer — it does not replace a full IDS/IPS system.
 
 ## ScreenShoot
-
-<img width="1628" height="878" alt="iaward" src="https://github.com/user-attachments/assets/2469f129-ab8a-4dab-a6a7-1e370b42f262" />
+<img width="1699" height="930" alt="iaguard" src="https://github.com/user-attachments/assets/b88d222b-8435-4c00-98e2-cd89ea7f4d1f" />
 
 
